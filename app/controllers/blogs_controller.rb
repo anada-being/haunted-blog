@@ -5,6 +5,7 @@ class BlogsController < ApplicationController
 
   before_action :set_blog, only: %i[show edit update destroy]
   before_action :is_your_blog, only: %i[edit update destroy]
+  before_action :is_premium, only: %i[create edit update]
 
   def index
     @blogs = Blog.search(params[:term]).published.default_order
@@ -53,6 +54,10 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
     @user = @blog.user
     raise ActiveRecord::RecordNotFound unless @user == current_user
+  end
+
+  def is_premium
+    params[:blog][:random_eyecatch] = false unless current_user.premium?
   end
 
   def blog_params
