@@ -51,9 +51,7 @@ class BlogsController < ApplicationController
   end
 
   def your_blog?
-    @blog = Blog.find(params[:id])
-    @user = @blog.user
-    raise ActiveRecord::RecordNotFound unless @user == current_user
+    raise ActiveRecord::RecordNotFound unless @blog.user == current_user
   end
 
   def premium?
