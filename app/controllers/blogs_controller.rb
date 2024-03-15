@@ -5,7 +5,7 @@ class BlogsController < ApplicationController
 
   before_action :set_blog, only: %i[show edit update destroy]
   before_action :your_blog?, only: %i[edit update destroy]
-  before_action :premium?, only: %i[create edit update]
+  before_action :premium?, only: %i[edit create update]
 
   def index
     @blogs = Blog.search(params[:term]).published.default_order
