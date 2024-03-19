@@ -49,7 +49,7 @@ class BlogsController < ApplicationController
       Blog.where(secret: false).find(params[:id])
     else
       blog = Blog.find(params[:id])
-      blog.secret ? current_user.blogs.find(params[:id]) : Blog.find(params[:id])
+      blog.secret ? current_user.blogs.find(params[:id]) : blog
     end
   end
 
